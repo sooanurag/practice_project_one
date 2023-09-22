@@ -1,0 +1,1 @@
+enum AuthRouteRadio{signUp,signIn}
