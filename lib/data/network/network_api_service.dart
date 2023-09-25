@@ -7,7 +7,9 @@ import 'package:http/http.dart';
 
 class NetworkApiService extends BaseApiService {
   @override
-  Future getApiCall({required String url}) async {
+  Future getApiCall({
+    required String url,
+  }) async {
     dynamic apiResponse;
     try {
       final respsonse =
@@ -21,12 +23,17 @@ class NetworkApiService extends BaseApiService {
   }
 
   @override
-  Future postApiCall({required String url, required data}) async {
+  Future postApiCall({
+    required String url,
+    required data,
+    Map<String, String>? header,
+  }) async {
     dynamic apiResponse;
     try {
       final response = await post(
         Uri.parse(url),
-        body: data,
+        body: jsonEncode(data) ,
+        headers: header,
       ).timeout(const Duration(seconds: 10));
       apiResponse = response;
     } on SocketException {
